@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виртуальное Путешествие в Средневековый Новгород</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" href="src/assets/иконка новгород.png" type="image/x-icon">
+</head>
+<body>
+    <div id="app">
+        <main>
+            <div id="map-container">
+                <img id="novgorod-map" src="src/assets/Новгород.png" alt="Карта Новгорода XI-XIII веков">
+                <div id="map-overlay"></div>
+            </div>
+            
+            <!-- Панель навигации слева внизу -->
+            <div class="navigation-panel">
+                <button class="nav-btn" id="fullscreen" title="Полный экран">⛶</button>
+                <button class="nav-btn" id="help" title="Помощь">?</button>
+                <button class="nav-btn" id="zoom-in" title="Увеличить">+</button>
+                <button class="nav-btn" id="zoom-out" title="Уменьшить">-</button>
+            </div>
+            
+            <!-- Панель информации -->
+            <div id="info-panel" class="info-panel hidden">
+                <h2 id="location-title">Информация о локации</h2>
+                <p id="location-description">Выберите место на карте для получения информации</p>
+                <button id="close-info">Закрыть</button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="src/js/config.js"></script>
+    <script src="src/js/utils.js"></script>
+    <script src="src/js/data-manager.js"></script>
+    <script src="src/js/building-navigation.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="src/js/map-data.js"></script>
+    <script src="src/js/zoom-controls.js"></script>
+    <script src="src/js/map.js"></script>
+    <script src="src/js/navigation.js"></script>
+    <script src="src/js/interaction-manager.js"></script>
+    <script src="src/js/voice-assistant.js"></script>
+    <script src="src/js/ui.js"></script>
+</body>
+</html>
