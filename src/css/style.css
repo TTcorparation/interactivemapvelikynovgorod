@@ -1,0 +1,338 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #a4c387;
+    color: #ecf0f1;
+    line-height: 1.6;
+    overflow: hidden;
+    height: 100vh;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+}
+
+header {
+    background-color: rgba(44, 62, 80, 0.9);
+    color: #ecf0f1;
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid #3498db;
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+#map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#novgorod-map {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.clickable-area {
+    position: absolute;
+    border: 2px solid transparent;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.5);
+    opacity: 0.8;
+    z-index: 3;
+}
+
+.clickable-area:hover {
+    border-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.7), 0 0 25px rgba(52, 152, 219, 0.5);
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.clickable-area:active {
+    transform: scale(0.98);
+}
+
+/* Пульсирующий эффект для лучшей видимости */
+.clickable-area.pulse {
+    animation: idlePulse 2s infinite;
+}
+
+@keyframes idlePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(52, 152, 219, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+}
+
+/* Панель навигации слева внизу */
+.navigation-panel {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+    background-color: rgba(44, 62, 80, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0.2);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.nav-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* Панель управления справа внизу */
+.control-panel {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+    background-color: rgba(44, 62, 80, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+/* Панель информации */
+.info-panel {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 300px;
+    background-color: rgba(4, 62, 80, 0.95);
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    border: 1px solid #3498db;
+}
+
+.info-panel h2 {
+    color: #3498db;
+    margin-top: 0;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.info-panel p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.info-panel button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.info-panel button:hover {
+    background-color: #c0392b;
+}
+
+/* Панель голосового ассистента */
+.voice-panel {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    width: 300px;
+    background-color: rgba(44, 62, 80, 0.95);
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid #3498db;
+}
+
+.voice-panel h2 {
+    color: #3498db;
+    margin-top: 0;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.voice-panel p {
+    margin: 10px 0;
+    line-height: 1.5;
+    min-height: 60px;
+}
+
+.voice-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.voice-btn:hover {
+    background-color: #27ae60;
+}
+
+.voice-btn.stop {
+    background-color: #e74c3c;
+}
+
+.voice-btn.stop:hover {
+    background-color: #c0392b;
+}
+
+/* Скрытие панелей */
+.hidden {
+    display: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .info-panel, .voice-panel {
+        width: calc(100% - 40px);
+        left: 20px;
+        right: 20px;
+        top: auto;
+        bottom: 80px;
+    }
+    
+    .navigation-panel, .control-panel {
+        bottom: 80px;
+    }
+}
+
+/* Стили для значка вопроса на кликабельных областях */
+.clickable-area::after {
+    content: "?";
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 16px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    z-index: 5;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.clickable-area:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Обеспечение того, что клики регистрируются на всей области */
+.clickable-area {
+    pointer-events: auto;
+}
+
+/* Анимация при клике */
+.clickable-area.clicked-animation::after {
+    animation: clickPulse 0.5s ease-out;
+}
+
+@keyframes clickPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        box-shadow: 0 0 0 15px rgba(52, 152, 219, 0);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+}
